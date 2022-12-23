@@ -28,7 +28,15 @@
     </property>
   </property>
   <property name="last" type="empty">
-    <property name="window-width" type="int" value="603"/>
-    <property name="window-height" type="int" value="550"/>
+    <property name="window-width" type="int" value="734"/>
+    <property name="window-height" type="int" value="607"/>
+  </property>
+  <property name="desktop-icons" type="empty">
+    <property name="file-icons" type="empty">
+      <property name="show-filesystem" type="bool" value="false"/>
+      <property name="show-trash" type="bool" value="false"/>
+      <property name="show-removable" type="bool" value="false"/>
+      <property name="show-home" type="bool" value="false"/>
+    </property>
   </property>
 </channel>
