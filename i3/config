@@ -119,9 +119,9 @@ set $ws3 "   "
 set $ws4 "   "
 set $ws5 " ﭮ  "
 set $ws6 "   "
-set $ws7 "   "
+set $ws7 "   "
 set $ws8 "   "
-set $ws9 "9"
+set $ws9 "   "
 set $ws10 "   "
 
 # switch to workspace
@@ -133,7 +133,7 @@ bindsym $mod+5 workspace $ws5
 bindsym $mod+6 workspace $ws6
 bindsym $mod+7 workspace $ws7
 bindsym $mod+8 workspace $ws8
-bindsym $mod+9 workspace number $ws9
+bindsym $mod+9 workspace $ws9
 bindsym $mod+0 workspace $ws10
 
 # move focused container to workspace
@@ -145,7 +145,7 @@ bindsym $mod+Shift+5 move container to workspace $ws5
 bindsym $mod+Shift+6 move container to workspace $ws6
 bindsym $mod+Shift+7 move container to workspace $ws7
 bindsym $mod+Shift+8 move container to workspace $ws8
-bindsym $mod+Shift+9 move container to workspace number $ws9
+bindsym $mod+Shift+9 move container to workspace $ws9
 bindsym $mod+Shift+0 move container to workspace $ws10
 
 for_window [class="Spotify"] move to workspace $ws10
@@ -197,7 +197,7 @@ gaps inner 9
 gaps outer 0
 
 #remove window titles and no border
-for_window [class="^.*"] border pixel 0
+for_window [class="^.*"] border pixel 1
 
 # Lock the screen when we press Win + Shift + x unloks by entering your password
 bindsym $mod+shift+x exec i3lock
@@ -209,15 +209,12 @@ exec picom -b
 #exec_always feh --bg-scale /home/salorib/Pictures/wallpaper.jpg
 
 # set up wallpaper and color scheme using pywal 
-exec_always wal -i /home/salorib/Pictures/mountains.jpg
+exec_always wal -i $HOME/.config/wallpapers/Sakura.png
 
 exec spotify
 
 # Start polybar on restart of i3wm
-exec_always /home/salorib/.config/polybar/launch.sh 
-
-
-set $bg-color #282A2E
+exec_always $HOME/.config/polybar/launch.sh 
 
 bindsym $mod+d exec rofi -show combi -modes combi -combi-modes window#run#drun -theme "solarized_alternate" -icon-theme "Papirus" -show-icons -font "JetBrains Mono 19"
 
