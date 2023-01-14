@@ -35,7 +35,7 @@ sudo pacman -S polybar
 sudo pacman -S thunar ranger 
 
 #Install color palette generator: pywal
-sudos pacman -S python-pywal
+sudo pacman -S python-pywal
 
 #Install image viewer: feh 
 sudo pacman -S feh
