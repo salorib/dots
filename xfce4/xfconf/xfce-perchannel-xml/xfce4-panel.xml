@@ -33,7 +33,13 @@
     </property>
   </property>
   <property name="plugins" type="empty">
-    <property name="plugin-1" type="string" value="applicationsmenu"/>
+    <property name="plugin-1" type="string" value="applicationsmenu">
+      <property name="button-icon" type="string" value="app-launcher"/>
+      <property name="button-title" type="string" value=""/>
+      <property name="custom-menu" type="bool" value="false"/>
+      <property name="show-menu-icons" type="bool" value="true"/>
+      <property name="show-tooltips" type="bool" value="true"/>
+    </property>
     <property name="plugin-2" type="string" value="tasklist">
       <property name="grouping" type="uint" value="1"/>
     </property>
