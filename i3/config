@@ -231,7 +231,7 @@ exec spotify
 # Start polybar on restart of i3wm
 exec_always $HOME/.config/polybar/launch.sh 
 
-bindsym $mod+d exec rofi -show combi -modes combi -combi-modes window#run#drun -theme "solarized_alternate" -icon-theme "Papirus" -show-icons -font "JetBrainsMono Nerd Font Regular 24"
+bindsym $mod+d exec rofi -show combi -combi-modes
 
 #screenshot 
 bindsym $mod+p exec "flameshot full -p ~/Pictures/" 
