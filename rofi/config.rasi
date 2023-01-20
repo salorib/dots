@@ -149,4 +149,6 @@ configuration {
       sorting-method:    "name";
   }
 }
-@theme "solarized"
+/* Dark theme. */
+@import "~/.cache/wal/colors-rofi-dark"
+/* @theme "custom" */
