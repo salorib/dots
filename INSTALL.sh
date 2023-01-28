@@ -1,3 +1,6 @@
+#Vars
+$HOME = /home/salorib
+
 #XDG directories
 sudo pacman -S xdg-user-dirs
 xdg-user-dirs-update
@@ -17,6 +20,8 @@ sudo pacman -S picom
 sudo pacman -S zsh
 #Change default shell to zsh:
 chsh -s $(which zsh)
+#Copy .zshrc to home directory
+cp $HOME/.config/zsh/.zshrc $HOME
 
 #install fonts
 sudo pacman -S ttf-font-awesome ttf-jetbrains-mono 
@@ -42,3 +47,5 @@ sudo pacman -S feh
 
 #Install tools: screenshots, lock screen, etc
 sudo pacman -S flameshot i3lock neofetch bashtop
+
+
