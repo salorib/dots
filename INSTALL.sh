@@ -1,6 +1,7 @@
 #!/bin/bash
 
 Packages="xdg-user-dirs,picom,zsh,neovim,rofi,polybar,thunar,ranger,python-pywal,feh,flameshot,i3lock,neofetch,bashtop"
+Fonts="ttf-font-awesome,ttf-jetbrains-mono,nerd-fonts-jetbrains-mono"
 oldIFS=$IFS
 IFS=,
 HOME=/home/salorib
@@ -14,8 +15,10 @@ cd yay
 makepkg -si
 
 #install fonts
-sudo pacman -S ttf-font-awesome ttf-jetbrains-mono 
-yay -S nerd-fonts-jetbrains-mono 
+for Font in $Fonts;
+do
+	checkpckg $Font
+done
 
 #Install zsh and dependencies
 sudo pacman -S zsh
