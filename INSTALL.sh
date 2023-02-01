@@ -16,16 +16,21 @@ makepkg -si
 #Install compositor
 sudo pacman -S picom
 
+#install fonts
+sudo pacman -S ttf-font-awesome ttf-jetbrains-mono 
+yay -S nerd-fonts-jetbrains-mono 
+
 #Install zsh and dependencies
 sudo pacman -S zsh
 #Change default shell to zsh:
 chsh -s $(which zsh)
-#Copy .zshrc to home directory
+#Install oh my zsh
+sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+#Install powerlevel10k theme
+git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+#Copy zsh config files to home directory
 cp $HOME/.config/zsh/.zshrc $HOME
-
-#install fonts
-sudo pacman -S ttf-font-awesome ttf-jetbrains-mono 
-yay -S nerd-fonts-jetbrains-mono 
+cp $HOME/.config/zsh/.p10k.zsh $HOME
 
 #Install editor: neovim 
 sudo pacman -S neovim
