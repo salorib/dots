@@ -1,9 +1,9 @@
-#Vars
-$HOME = /home/salorib
+#!/bin/bash
 
-#XDG directories
-sudo pacman -S xdg-user-dirs
-xdg-user-dirs-update
+Packages="xdg-user-dirs,picom,zsh,neovim,rofi,polybar,thunar,ranger,python-pywal,feh,flameshot,i3lock,neofetch,bashtop"
+oldIFS=$IFS
+IFS=,
+HOME=/home/salorib
 
 #AUR package manager
 sudo pacman -S base-devel git
@@ -12,9 +12,6 @@ cd aur
 git clone https://aur.archlinux.org/yay.git
 cd yay
 makepkg -si
-
-#Install compositor
-sudo pacman -S picom
 
 #install fonts
 sudo pacman -S ttf-font-awesome ttf-jetbrains-mono 
@@ -32,25 +29,30 @@ git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$
 cp $HOME/.config/zsh/.zshrc $HOME
 cp $HOME/.config/zsh/.p10k.zsh $HOME
 
-#Install editor: neovim 
-sudo pacman -S neovim
 
-#Install switcher: rofi
-sudo pacman -S rofi
+checkpckg(){
+echo "Checking if $1 is installed:"
+if pacman -Q $1 > /dev/null; then 
+	echo $1 is installed, skiping;
+else
+	read -p "$1 is not installed, install $1? (y/n) " var
+	if [[ $var == 'y' || $var == 'Y' || $var == 'yes' || $var == 'Yes' || $var == 'YES' ]]; then 
+		sudo pacman -S $1
+	fi
+fi
+echo '';
+}
 
-#Install status bar: Polybar
-sudo pacman -S polybar
+for Pack in $Packages;
+do
+	checkpckg $Pack
+done
 
-#Install filemanagers: ranger and thunar
-sudo pacman -S thunar ranger 
+#Update XDG directories
+if pacman -Q xdg-user-dirs > /dev/null; then
+	xdg-user-dirs-update
+fi
 
-#Install color palette generator: pywal
-sudo pacman -S python-pywal
 
-#Install image viewer: feh 
-sudo pacman -S feh
-
-#Install tools: screenshots, lock screen, etc
-sudo pacman -S flameshot i3lock neofetch bashtop
-
+IFS=$oldIFS
 
