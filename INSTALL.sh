@@ -1,56 +1,84 @@
-#Vars
-$HOME = /home/salorib
+#!/bin/bash
 
-#XDG directories
-sudo pacman -S xdg-user-dirs
-xdg-user-dirs-update
+#Packages to install
+Packages="git,xdg-user-dirs,picom,zsh,neovim,rofi,polybar,thunar,ranger,python-pywal,feh,flameshot,i3lock,neofetch,bashtop"
+#Fonts to install
+Fonts="ttf-font-awesome,ttf-jetbrains-mono,nerd-fonts-jetbrains-mono"
+oldIFS=$IFS
+IFS=,
+HOME=/home/salorib
+
+#Check if packages are already installed
+checkpckg(){
+echo "Checking if $1 is installed:"
+if pacman -Q $1 > /dev/null; then 
+	echo $1 is installed, skipping;
+else
+	read -p "$1 is not installed, install $1? (y/n) " var
+	if [[ $var == 'y' || $var == 'Y' || $var == 'yes' || $var == 'Yes' || $var == 'YES' ]]; then 
+		sudo pacman -S $1
+	fi
+fi
+echo '';
+}
+
 
 #AUR package manager
-sudo pacman -S base-devel git
-mkdir aur
-cd aur
-git clone https://aur.archlinux.org/yay.git
-cd yay
-makepkg -si
+echo "Checking if yay is installed:"
+if pacman -Q yay > /dev/null ; then 
+	echo yay is installed, skipping;
+	echo ""
+else
+	sudo pacman -S base-devel
+	mkdir aur
+	cd aur
+	git clone https://aur.archlinux.org/yay.git
+	cd yay
+	makepkg -si
+fi
 
-#Install compositor
-sudo pacman -S picom
+#Install fonts
+for Font in $Fonts;
+do
+	checkpckg $Font
+done
 
-#install fonts
-sudo pacman -S ttf-font-awesome ttf-jetbrains-mono 
-yay -S nerd-fonts-jetbrains-mono 
+#Install all Packages
+for Pack in $Packages;
+do
+	checkpckg $Pack
+done
 
-#Install zsh and dependencies
-sudo pacman -S zsh
-#Change default shell to zsh:
-chsh -s $(which zsh)
-#Install oh my zsh
-sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
-#Install powerlevel10k theme
-git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
-#Copy zsh config files to home directory
-cp $HOME/.config/zsh/.zshrc $HOME
-cp $HOME/.config/zsh/.p10k.zsh $HOME
+read -p "Install Oh My Zsh! ? (y/n) " var
+if [[ $var == 'y' || $var == 'Y' || $var == 'yes' || $var == 'Yes' || $var == 'YES' ]]; then 
+	if ! pacman -Q zsh > /dev/null ; then
+		echo "zsh is not installed, install zsh before install Oh My Zsh!"
+		#Install zsh and dependencies
+		sudo pacman -S zsh
+		#Change default shell to zsh:
+		chsh -s $(which zsh)
+	fi
+	#Install oh my zsh
+	echo "Installing oh my zsh! ..."
+	sh -c "$(curl -fsSL https://raw.githubusercontent.com/ohmyzsh/ohmyzsh/master/tools/install.sh)"
+	
+	#Install powerlevel10k theme
+	echo Installing powerlevel10k theme ...
+	git clone --depth=1 https://github.com/romkatv/powerlevel10k.git ${ZSH_CUSTOM:-$HOME/.oh-my-zsh/custom}/themes/powerlevel10k
+	#Copy zsh config files to home directory
+	echo Copying configuration ...
+	cp $HOME/.config/zsh/.zshrc $HOME
+	cp $HOME/.config/zsh/.p10k.zsh $HOME
+else
+	echo ""
 
-#Install editor: neovim 
-sudo pacman -S neovim
+fi
 
-#Install switcher: rofi
-sudo pacman -S rofi
+#Update XDG directories
+if pacman -Q xdg-user-dirs > /dev/null; then
+	xdg-user-dirs-update
+fi
 
-#Install status bar: Polybar
-sudo pacman -S polybar
 
-#Install filemanagers: ranger and thunar
-sudo pacman -S thunar ranger 
-
-#Install color palette generator: pywal
-sudo pacman -S python-pywal
-
-#Install image viewer: feh 
-sudo pacman -S feh
-
-#Install tools: screenshots, lock screen, etc
-sudo pacman -S flameshot i3lock neofetch bashtop
-
+IFS=$oldIFS
 
