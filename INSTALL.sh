@@ -11,7 +11,7 @@ HOME=/home/salorib
 #Check if packages are already installed
 checkpckg(){
 echo "Checking if $1 is installed:"
-if pacman -Q $1 > /dev/null; then 
+if pacman -Q $1 > /dev/null 2>&1 ; then 
 	echo $1 is installed, skipping;
 else
 	read -p "$1 is not installed, install $1? (y/n) " var
@@ -25,7 +25,7 @@ echo '';
 
 #AUR package manager
 echo "Checking if yay is installed:"
-if pacman -Q yay > /dev/null ; then 
+if pacman -Q yay > /dev/null 2>&1 ; then 
 	echo yay is installed, skipping;
 	echo ""
 else
@@ -75,7 +75,7 @@ else
 fi
 
 #Update XDG directories
-if pacman -Q xdg-user-dirs > /dev/null; then
+if pacman -Q xdg-user-dirs > /dev/null 2>&1 ; then
 	xdg-user-dirs-update
 fi
 
