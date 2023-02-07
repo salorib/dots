@@ -7,7 +7,6 @@ Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'}
 Plug 'nvim-telescope/telescope.nvim'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons' " optional, for file icons
-Plug ''
 Plug 'editorconfig/editorconfig-vim'
 Plug 'nvim-lualine/lualine.nvim'
 " If you want to have icons in your statusline choose one of these
@@ -71,6 +70,37 @@ vim.opt.listchars:append "eol:↴"
 require("indent_blankline").setup {
     show_end_of_line = true,
 }
+
+
+-- nvim-tree
+-- disable netrw at the very start of your init.lua (strongly advised)
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+-- empty setup using defaults
+require("nvim-tree").setup()
+
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    width = 30,
+    mappings = {
+      list = {
+        { key = "u", action = "dir_up" },
+      },
+    },
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
 
 END
 
