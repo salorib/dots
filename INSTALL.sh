@@ -77,6 +77,14 @@ if pacman -Q xdg-user-dirs > /dev/null 2>&1 ; then
     xdg-user-dirs-update
 fi
 
+read -p "Install vim-plug? (y/n) " var
+if [[ $var == 'y' || $var == 'Y' || $var == 'yes' || $var == 'Yes' || $var == 'YES' ]]; then 
+    echo "Installing vim-plug ..."
+    sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs \
+       https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
+else
+    echo ""
+fi
 
 IFS=$oldIFS
 
