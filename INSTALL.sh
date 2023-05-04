@@ -1,7 +1,7 @@
 #!/bin/bash
 
 #Packages to install
-Packages="git,xdg-user-dirs,picom,zsh,neovim,rofi,polybar,thunar,ranger,python-pywal,feh,flameshot,i3lock,neofetch,bashtop"
+Packages="git,xdg-user-dirs,picom,zsh,neovim,rofi,polybar,thunar,ranger,python-pywal,feh,flameshot,i3lock,neofetch,bashtop,kitty"
 #Fonts to install
 Fonts="ttf-font-awesome,ttf-jetbrains-mono,ttf-jetbrains-mono-nerd"
 oldIFS=$IFS
